@@ -14,7 +14,7 @@ app.use(cors()); //initalizations cors
 app.use('/posts', postRoutes); //create middelware to use routes
 
 //setup connection with MongoDB Cluster
-const CONNECTION_URL = 'mongodb+srv://admin-mils:I@mgunatit369@cluster0.vj867.mongodb.net/<dbname>?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb+srv://admin-mils:I@mgunatit369@cluster0.vj867.mongodb.net/LoYourMem?retryWrites=true&w=majority'
 
 const PORT = process.env.PORT || 5000;
 
@@ -23,7 +23,7 @@ mongoose.connect( CONNECTION_URL, {
     useCreateIndex: true,
     useUnifiedTopology: true
 }).then(() => {
-    app.listen(PORT, () => console.log('Server running on port: ${PORT}'));
+    app.listen(PORT, () => console.log('Server running on port:' +PORT ));
 }).catch((err) => {
     console.log(err.message);
 });

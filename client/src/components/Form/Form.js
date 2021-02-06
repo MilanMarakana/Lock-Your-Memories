@@ -17,21 +17,24 @@ const Form = ({ currentId, setCurrentId }) => {
     }, [post]);
 
     const clearDataHandler = () => {
-        setCurrentId(null);
+        setCurrentId(0);
         setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
     };
     
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
         e.preventDefault();
 
 
-        if(currentId) {
-            dispatch(updatePost(currentId, postData));
+        if(currentId === 0) {
+            
+            dispatch(createPost(postData));
+            clearDataHandler();
         }
         else{
-            dispatch(createPost(postData));
+            dispatch(updatePost(currentId, postData));
+            clearDataHandler();
         }
-        clearDataHandler();
+ 
     };
 
   
@@ -70,7 +73,7 @@ const Form = ({ currentId, setCurrentId }) => {
                     label="Tags"
                     fullWidth
                     value={postData.tags}
-                    onChange={(event) => setPostData({ ...postData, tags: event.target.value })}
+                    onChange={(event) => setPostData({ ...postData, tags: event.target.value.split(',') })}
                 />
                 <div className={classes.fileInput}>
                     <FileBase 
